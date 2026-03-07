@@ -1,0 +1,12 @@
+SECRET_KEY=Секретный ключ Джанго
+DEBUG=True or False
+DB_NAME=имя датабазы
+DB_USER=пользователь датабазы
+DB_PASSWORD=пароль датабазы
+DB_HOST=хост
+DB_PORT=порт
+
+REDIS_HOST=хост редис
+REDIS_PORT=порт редис
+
+TELEGRAM_BOT_TOKEN=токен вашего бота
