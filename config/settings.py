@@ -10,6 +10,8 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/6.0/ref/settings/
 """
 import os
+from os import getenv
+
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -132,3 +134,7 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'https://your-frontend-domain.com',
 ]
+
+CELERY_BROKER_URL = f"redis://{getenv('REDIS_HOST')}:{getenv('REDIS_PORT')}/0"
+CELERY_RESULT_BACKEND = f"redis://{getenv('REDIS_HOST')}:{getenv('REDIS_PORT')}/0"
+CELERY_TIMEZONE = 'Europe/Moscow'
