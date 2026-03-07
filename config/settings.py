@@ -15,6 +15,7 @@ from os import getenv
 from dotenv import load_dotenv
 from pathlib import Path
 
+load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -41,7 +42,12 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    'users',
+    'habits',
+    'telegram_bot',
+
     'corsheaders',
+    'drf_spectacular',
 ]
 
 MIDDLEWARE = [
@@ -138,3 +144,17 @@ CORS_ALLOWED_ORIGINS = [
 CELERY_BROKER_URL = f"redis://{getenv('REDIS_HOST')}:{getenv('REDIS_PORT')}/0"
 CELERY_RESULT_BACKEND = f"redis://{getenv('REDIS_HOST')}:{getenv('REDIS_PORT')}/0"
 CELERY_TIMEZONE = 'Europe/Moscow'
+
+CELERY_BEAT_SCHEDULE = {
+    'send-habit-reminders-every-minute': {
+        'task': 'telegram_bot.tasks.send_habit_reminders',
+        'schedule': 60.0,
+    },
+}
+
+REST_FRAMEWORK = {
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
