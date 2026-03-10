@@ -9,29 +9,87 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Habit',
+            name="Habit",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('place', models.CharField(max_length=255, verbose_name='Место')),
-                ('time', models.TimeField(verbose_name='Время')),
-                ('action', models.CharField(max_length=255, verbose_name='Действие')),
-                ('is_pleasant', models.BooleanField(default=False, verbose_name='Признак приятной привычки')),
-                ('periodicity', models.PositiveSmallIntegerField(default=1, validators=[django.core.validators.MinValueValidator(1), django.core.validators.MaxValueValidator(7)], verbose_name='Периодичность в днях')),
-                ('reward', models.CharField(blank=True, max_length=255, null=True, verbose_name='Вознаграждение')),
-                ('execution_time', models.PositiveIntegerField(validators=[django.core.validators.MaxValueValidator(120)], verbose_name='Время выполнения в секундах')),
-                ('is_public', models.BooleanField(default=False, verbose_name='Признак публичности')),
-                ('last_notification_date', models.DateField(blank=True, null=True, verbose_name='Дата последнего уведомления')),
-                ('related_habit', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name='related_for', to='habits.habit', verbose_name='Связанная привычка')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("place", models.CharField(max_length=255, verbose_name="Место")),
+                ("time", models.TimeField(verbose_name="Время")),
+                ("action", models.CharField(max_length=255, verbose_name="Действие")),
+                (
+                    "is_pleasant",
+                    models.BooleanField(
+                        default=False, verbose_name="Признак приятной привычки"
+                    ),
+                ),
+                (
+                    "periodicity",
+                    models.PositiveSmallIntegerField(
+                        default=1,
+                        validators=[
+                            django.core.validators.MinValueValidator(1),
+                            django.core.validators.MaxValueValidator(7),
+                        ],
+                        verbose_name="Периодичность в днях",
+                    ),
+                ),
+                (
+                    "reward",
+                    models.CharField(
+                        blank=True,
+                        max_length=255,
+                        null=True,
+                        verbose_name="Вознаграждение",
+                    ),
+                ),
+                (
+                    "execution_time",
+                    models.PositiveIntegerField(
+                        validators=[django.core.validators.MaxValueValidator(120)],
+                        verbose_name="Время выполнения в секундах",
+                    ),
+                ),
+                (
+                    "is_public",
+                    models.BooleanField(
+                        default=False, verbose_name="Признак публичности"
+                    ),
+                ),
+                (
+                    "last_notification_date",
+                    models.DateField(
+                        blank=True,
+                        null=True,
+                        verbose_name="Дата последнего уведомления",
+                    ),
+                ),
+                (
+                    "related_habit",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.SET_NULL,
+                        related_name="related_for",
+                        to="habits.habit",
+                        verbose_name="Связанная привычка",
+                    ),
+                ),
             ],
             options={
-                'verbose_name': 'Привычка',
-                'verbose_name_plural': 'Привычки',
-                'ordering': ['id'],
+                "verbose_name": "Привычка",
+                "verbose_name_plural": "Привычки",
+                "ordering": ["id"],
             },
         ),
     ]

@@ -8,15 +8,13 @@ from telegram_bot.tasks import send_habit_reminders
 
 
 @pytest.mark.django_db
-@patch('telegram_bot.tasks.send_telegram_message')
+@patch("telegram_bot.tasks.send_telegram_message")
 def test_send_habit_reminder(mock_send_message):
     now = timezone.localtime()
 
-    user = UserFactory(telegram_chat_id='123456789')
+    user = UserFactory(telegram_chat_id="123456789")
     habit = HabitFactory(
-        user=user,
-        time=now.strftime('%H:%M'),
-        last_notification_date=None
+        user=user, time=now.strftime("%H:%M"), last_notification_date=None
     )
 
     send_habit_reminders()

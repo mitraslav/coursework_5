@@ -10,9 +10,8 @@ def send_habit_reminders():
     now = timezone.localtime()
     today = timezone.localdate()
 
-    habits = Habit.objects.select_related('user').filter(
-        time__hour=now.hour,
-        time__minute=now.minute
+    habits = Habit.objects.select_related("user").filter(
+        time__hour=now.hour, time__minute=now.minute
     )
 
     for habit in habits:
@@ -24,8 +23,8 @@ def send_habit_reminders():
 
         send_telegram_message(
             chat_id=habit.user.telegram_chat_id,
-            text=f'Напоминание: {habit.action} в {habit.time.strftime("%H:%M")}'
+            text=f'Напоминание: {habit.action} в {habit.time.strftime("%H:%M")}',
         )
 
         habit.last_notification_date = today
-        habit.save(update_fields=['last_notification_date'])
+        habit.save(update_fields=["last_notification_date"])
